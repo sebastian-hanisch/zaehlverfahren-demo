@@ -1,7 +1,6 @@
 # Verfahrenswahl beim Zählen – welches Verfahren, gemessen woran? – Streamlit-Demo
 
-<!-- TODO nach dem Deploy: direkt hierher den Live-Link setzen (Leerzeile davor und danach):
-**[→ Demo live ausprobieren](https://sebastianhanisch-zaehlverfahren-demo.streamlit.app/)** -->
+**[→ Demo live ausprobieren](https://sebastianhanisch-zaehlverfahren-demo.streamlit.app/)**
 
 Stück 16 von 16, der Abschluss der Reihe **„Abzählen und erzeugende Funktionen“** in der „Konzepte“-Reihe für die Website „Sebastian Hanisch – Operations Research und Machine Learning“ (die Linie wird erst vollständig veröffentlicht). Vorgänger sind `aufzaehlen-rekursion-demo` (Stück 1), `rationale-ef-demo` (Stück 2), `symbolische-methode-demo` (Stück 3), `semiring-rekursion-demo` (Stück 4), `multimengen-partitionen-demo` (Stück 5), `beschriftete-strukturen-demo` (Stück 6), `siebformel-demo` (Stück 7), `zaehlen-nach-parameter-demo` (Stück 8), `asymptotik-demo` (Stück 9), `gleichverteilt-ziehen-demo` (Stück 10), `burnside-polya-demo` (Stück 11), `isomorphieausschluss-demo` (Stück 12), `frontier-diagramm-demo` (Stück 13), `tutte-polynom-demo` (Stück 14) und `knuth-schaetzer-demo` (Stück 15). Diese Demo lässt die **Verfahren** dieser Stücke auf denselben Aufgaben nebeneinander laufen, mit demselben Maß für den Aufwand (**Grundschritte** mit einer Obergrenze, dem **Budget**), und prüft die Zahl gegen die anderen Verfahren der Zeile, wo mindestens zwei Verfahren im Budget liegen (26 von 45 Zellen). Das Gegenstück in der Inverse-Linie ist `verfahrensvergleich-demo` (Regularisierungsverfahren auf einer gemeinsamen Welt).
 
@@ -126,4 +125,4 @@ Gebaut mit Streamlit, Plotly und fpdf2.
 
 ---
 
-Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). Mehr zu den Demos: [Interaktive Demos](https://sebastianhanisch.net/demos.html).
+Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). Mehr zur Reihe: [Abzählen: von der Rekursion zur Verfahrenswahl](https://sebastianhanisch.net/konzepte-abzaehlen.html).
