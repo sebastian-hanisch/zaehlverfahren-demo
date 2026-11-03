@@ -55,8 +55,8 @@ def test_error_text_when_the_integer_methods_disagree():
 def test_grid_and_switch_verdicts_exact():
     cells = ev.grid_cells()
     assert ev.verdict_grid(cells) == ("success",
-        "In 45 Zellen aus 7 Familien (Budget 1.000.000 Schritte) gewinnen 12 verschiedene Verfahren; in 4 Zellen gewinnt keines. "
-        "In 6 von 7 Familien wechselt der Gewinner mit der Größe (F1, F2, F4, F5, F6, F7). Es gibt kein bestes Verfahren, nur eines, das zu Struktur, Frage und Größe passt.")
+        "In 45 Zellen aus 7 Familien (Budget 1.000.000 Schritte) gewinnen 12 verschiedene Bezeichnungen (etwa sieben Grundideen); in 4 Zellen gewinnt keines. "
+        "In 5 von 7 Familien wechselt der Gewinner zwischen zwei Verfahren (F1, F2, F4, F5, F6); in 1 weiteren (F7) fällt er irgendwann weg. In diesen 7 Familien gibt es kein Verfahren, das überall gewinnt, nur eines, das zu Struktur, Frage und Größe passt.")
     assert ev.verdict_switch(cells) == ("success",
         "Der Gewinner wechselt an 7 Stellen: F1: von n = 30 (Tabelle) zu n = 100 (Matrixpotenz); F2: von n = 6, k = 3 (Stirling-Tabelle) zu n = 10, k = 4 (Siebformel); F4: von 10×10 (Kasteleyn) zu 12×12 (Profil-Rechnung); "
         "F4: von 14×14 (Profil-Rechnung) zu 16×16 (keines); F5: von 3×3 (Aufzählen) zu 4×4 (Frontier-Diagramm); F6: von 2×2 (Tutte-Frontier) zu 3×3 (Transfermatrix); "
@@ -79,7 +79,7 @@ def test_estimator_and_rule_verdicts_exact():
         "In allen 14 Zellen, in denen ein exaktes Verfahren im Budget liegt und der Schätzer bestimmbar ist, ist das beste exakte Verfahren billiger (am deutlichsten bei F4 10×10: 25 gegen 265.026 Schritte). "
         "In 3 Zellen liegt kein exaktes Verfahren im Budget; dort ist der Schätzer entweder nicht bestimmbar (2 Zellen) oder braucht mehr als das Budget.")
     assert ev.verdict_rules(ev.rule_rows(cells)) == ("success",
-        "Das Regelwerk aus Merkmalen (Version 1, vor der Messung geschrieben) trifft 41 von 45 Gewinnern, 2 gleichwertig, 2 verfehlt (F1 n = 1.000: Gewinner Matrixpotenz, Regel Tabelle; F4 16×16: Gewinner keines, Regel Profil-Rechnung). "
+        "Das Regelwerk aus Merkmalen (Version 1, mit Kenntnis der ersten Messreihe geschrieben) beschreibt 41 von 45 Gewinnern gleich, 2 gleichwertig, 2 verfehlt (F1 n = 1.000: Gewinner Matrixpotenz, Regel Tabelle; F4 16×16: Gewinner keines, Regel Profil-Rechnung). "
         "Version 2 (Schwelle nach der Messung angepasst): 42 gleich, 2 gleichwertig, 1 verfehlt: angepasst, nicht vorhergesagt.")
 
 

@@ -133,7 +133,7 @@ def test_preset_help_numbers_match_the_computation():
     f3 = ev.analyse(S(**C.PRESETS["Halsketten n = 14 als Liste: FKM statt Burnside"])).cell
     assert f3["winner"] == "FKM" and all(x in h["Halsketten n = 14 als Liste: FKM statt Burnside"] for x in ("341.802", "30 Schritte", "836.410", "27.880"))
     f7 = ev.analyse(S(**C.PRESETS["Teilmengensumme n = 24: nichts geht mehr"])).cell
-    assert f7["winner"] is None and f7["estimator"]["nötig"] == 1199600 and "über eine Million" in h["Teilmengensumme n = 24: nichts geht mehr"]
+    assert f7["winner"] is None and f7["estimator"]["nötig"] == 1199600 and "mehr als eine Million" in h["Teilmengensumme n = 24: nichts geht mehr"]
 
 
 def test_readme_mentions_every_module_file():

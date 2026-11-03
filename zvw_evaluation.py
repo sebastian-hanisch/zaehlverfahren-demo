@@ -166,7 +166,7 @@ def compute_cell(key: str, size, budget: int, question: str, with_estimator: boo
 
 # ----------------------------------------------------------------------------- Regelwerk aus Merkmalen
 def rule(key: str, size, question: str = C.QUESTION_ZAHL, version: int = 1) -> str | None:
-    """Empfehlung des Regelwerks aus Merkmalen der Struktur (Version 1: a priori; Version 2: Schwelle der Binärketten nach der Messung angepasst)."""
+    """Empfehlung des Regelwerks aus Merkmalen der Struktur (Version 1: mit Kenntnis der ersten Messreihe geschrieben; Version 2: Schwelle der Binärketten nach der Messung angepasst)."""
     if key == "F1":
         return "Tabelle" if size <= (10_000 if version == 1 else 100) else "Matrixpotenz"
     if key == "F2":
@@ -316,9 +316,12 @@ def verdict_grid(cells: list):
     for c in cells:
         by_family.setdefault(c["key"], []).append(c["winner"] or NO_WINNER)
     changing = [k for k, ws in by_family.items() if len(set(ws)) > 1]
+    switching = [k for k in changing if len({w for w in by_family[k] if w != NO_WINNER}) > 1]
+    dropping = [k for k in changing if k not in switching]
     ok = len(distinct) >= 5 and all(len({r["Wert"] for r in c["methods"] if r["gültig"]}) <= 1 for c in cells)
-    return ("success" if ok else "error"), (f"In {len(cells)} Zellen aus {len(by_family)} Familien (Budget {big_text(C.GRID_BUDGET)} Schritte) gewinnen {len(distinct)} verschiedene Verfahren; in {none} Zellen gewinnt keines. "
-                                            f"In {len(changing)} von {len(by_family)} Familien wechselt der Gewinner mit der Größe ({', '.join(changing)}). Es gibt kein bestes Verfahren, nur eines, das zu Struktur, Frage und Größe passt.")
+    drop_text = f"; in {len(dropping)} weiteren ({', '.join(dropping)}) fällt er irgendwann weg" if dropping else ""
+    return ("success" if ok else "error"), (f"In {len(cells)} Zellen aus {len(by_family)} Familien (Budget {big_text(C.GRID_BUDGET)} Schritte) gewinnen {len(distinct)} verschiedene Bezeichnungen (etwa sieben Grundideen); in {none} Zellen gewinnt keines. "
+                                            f"In {len(switching)} von {len(by_family)} Familien wechselt der Gewinner zwischen zwei Verfahren ({', '.join(switching)}){drop_text}. In diesen {len(by_family)} Familien gibt es kein Verfahren, das überall gewinnt, nur eines, das zu Struktur, Frage und Größe passt.")
 
 
 def switch_series(cells: list, key: str) -> dict:
@@ -437,7 +440,7 @@ def verdict_rules(res: dict):
     v1, v2 = res[1], res[2]
     n = sum(v1["Zahlen"].values())
     miss = "; ".join(f"{k} {g}: Gewinner {w}, Regel {r}" for k, g, w, r in v1["Verfehlungen"]) or "keine"
-    return "success", (f"Das Regelwerk aus Merkmalen (Version 1, vor der Messung geschrieben) trifft {v1['Zahlen']['gleich']} von {n} Gewinnern, {v1['Zahlen']['gleichwertig']} gleichwertig, {v1['Zahlen']['verfehlt']} verfehlt ({miss}). "
+    return "success", (f"Das Regelwerk aus Merkmalen (Version 1, mit Kenntnis der ersten Messreihe geschrieben) beschreibt {v1['Zahlen']['gleich']} von {n} Gewinnern gleich, {v1['Zahlen']['gleichwertig']} gleichwertig, {v1['Zahlen']['verfehlt']} verfehlt ({miss}). "
                        f"Version 2 (Schwelle nach der Messung angepasst): {v2['Zahlen']['gleich']} gleich, {v2['Zahlen']['gleichwertig']} gleichwertig, {v2['Zahlen']['verfehlt']} verfehlt: angepasst, nicht vorhergesagt.")
 
 

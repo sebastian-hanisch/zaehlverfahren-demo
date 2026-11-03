@@ -1,4 +1,4 @@
-"""Rechenkern: sieben Familien von Zählaufgaben, je mehrere Verfahren aus den Stücken 1 bis 15 mit demselben Aufwandsmaß (Zahl der Grundschritte mit Obergrenze), plus Schätzer für den Aufwand-Vergleich.
+"""Rechenkern: sieben Familien von Zählaufgaben, je mehrere Verfahren aus den Stücken 1 bis 15 mit einem gemeinsamen Schrittzähler (Zahl der Grundschritte mit Obergrenze; jedes Verfahren zählt seine eigene Einheit), plus Schätzer für den Aufwand-Vergleich.
 
 Jedes Verfahren bekommt einen Zähler `Work` und wirft `OverBudget`, wenn er die Obergrenze überschreitet; `run` macht daraus ein Ergebnis (Status, Wert, Schritte).
 Die Einheit „Schritt“ ist je Verfahren festgelegt (siehe Docstrings) und nur der Größenordnung nach vergleichbar. Alles mit `int` und `Fraction`; Zufall nur über feste Seeds."""

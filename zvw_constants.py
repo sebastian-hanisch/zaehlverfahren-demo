@@ -63,10 +63,10 @@ PRESETS = {
     "Teilmengensumme n = 24: nichts geht mehr": {"family": "F7: Teilmengen mit halber Gesamtsumme", "size": 4, "budget": 1000000, "question": QUESTION_ZAHL},
 }
 PRESET_HELP = {
-    "Standardfall: Dominosteine 12×12 (Kasteleyn falsch)": "Kasteleyns Kosinusformel ist in Gleitkomma ab 12×12 falsch (53.060.477.521.959.928 statt 53.060.477.521.960.000, weil der Wert über 2⁵³ liegt); die Profil-Rechnung ist 2.897-mal teurer, aber richtig und gewinnt.",
+    "Standardfall: Dominosteine 12×12 (Kasteleyn falsch)": "Kasteleyns Kosinusformel ist in Gleitkomma ab 12×12 falsch (53.060.477.521.959.928 statt 53.060.477.521.960.000, durch Rundungsfehler im Produkt; der Wert liegt über 2⁵³); die Profil-Rechnung ist 2.897-mal teurer, aber richtig und gewinnt.",
     "Binärketten: Wechsel von der Tabelle zur Matrixpotenz": "Bei n = 1.000 gewinnt die Matrixpotenz (136 Schritte) gegen die Tabelle (999 Schritte); bei n = 30 war es noch die Tabelle (29 gegen 80).",
     "Wege im 8×8-Gitter: das Frontier-Diagramm gewinnt": "789.360.053.252 einfache Wege: das Frontier-Diagramm braucht 64.993 Schritte, das Aufzählen über eine Million; der Schätzer wäre für 5 Prozent Standardfehler noch viel teurer.",
     "Dreifärbungen 6×6, vier Farbenzahlen: das Polynom gewinnt": "Für k = 2 bis 5 braucht die Transfermatrix 135.842.020 Schritte, das Tutte-Polynom einmal 2.586.431 (Faktor 52,5) und liefert dazu Spannbäume und Zuverlässigkeit.",
     "Halsketten n = 14 als Liste: FKM statt Burnside": "Die Zahl 341.802 kostet Burnside 30 Schritte; die Liste aller Halsketten kostet FKM 836.410 Schritte (Faktor 27.880).",
-    "Teilmengensumme n = 24: nichts geht mehr": "24 Gegenstände mit Gewichten bis 100.000: Tabelle und Aufzählen liegen über dem Budget, und der Schätzer braucht für 5 Prozent Standardfehler über eine Million Sondierungen.",
+    "Teilmengensumme n = 24: nichts geht mehr": "24 Gegenstände mit Gewichten bis 100.000: Tabelle und Aufzählen liegen über dem Budget, und der Schätzer bräuchte für 5 Prozent Standardfehler schätzungsweise mehr als eine Million Sondierungen (die Streuung ist selbst unsicher).",
 }

@@ -1,8 +1,8 @@
 """Verfahrenswahl beim Zählen – welches Verfahren, gemessen woran? - interaktive Konzept-Demo
 Sebastian Hanisch - Operations Research und Machine Learning
 
-Stück 16 der Reihe „Abzählen und erzeugende Funktionen“ (Abschluss): Sieben Familien von Zählaufgaben, je mehrere Verfahren aus den Stücken davor mit demselben Aufwandsmaß (Grundschritte, Obergrenze).
-Es gibt kein bestes Verfahren: Struktur, Frage und Größe entscheiden, und ein schneller Gewinner kann falsch sein.
+Stück 16 der Reihe „Abzählen und erzeugende Funktionen“ (Abschluss): Sieben Familien von Zählaufgaben, je mehrere Verfahren aus den Stücken davor mit einem gemeinsamen Schrittzähler und Budget (jedes Verfahren zählt seine eigene Einheit, verglichen wird die Größenordnung).
+In diesen Familien gibt es kein bestes Verfahren: Struktur, Frage und Größe entscheiden, und ein schneller Gewinner kann falsch sein.
 Aufbau und Regeln: DEMO-PLAYBOOK.md (§2).
 
 Lauffähig mit: streamlit run app.py
@@ -84,9 +84,9 @@ with st.container(key="kopf"):
     st.title("⚖️ Verfahrenswahl beim Zählen – welches Verfahren, gemessen woran?")
 st.markdown(
     """
-**Welches Zählverfahren nimmt man?** Die Stücke 1 bis 15 haben **Verfahren** gebaut: Tabelle und Rekursion, Transfermatrix, erzeugende Funktion, Siebformel, Burnside, Frontier-Diagramm, Tutte-Polynom, Schätzer. Hier laufen sie auf **denselben Aufgaben** nebeneinander, mit **demselben Maß** für den Aufwand
-(Zahl der **Grundschritte** mit einer Obergrenze, dem **Budget**), und jede exakte Zahl wird gegen die anderen Verfahren der Zeile geprüft. Es gibt **kein bestes Verfahren**: die Wahl hängt an der **Struktur** (Baukasten, Symmetrie, Nebenbedingung), an der **Frage** (nur die Zahl, die Liste aller Vertreter, ein Polynom für viele Parameter)
-und an der **Größe**; in jeder Familie wechselt der Gewinner, ein schneller Gewinner kann **falsch** sein, und manchmal geht nichts mehr.
+**Welches Zählverfahren nimmt man?** Die Stücke 1 bis 15 haben **Verfahren** gebaut: Tabelle und Rekursion, Transfermatrix, erzeugende Funktion, Siebformel, Burnside, Frontier-Diagramm, Tutte-Polynom, Schätzer. Hier laufen sie auf **denselben Aufgaben** nebeneinander, mit **einem gemeinsamen Zähler** für den Aufwand
+(Zahl der **Grundschritte** mit einer Obergrenze, dem **Budget**; jedes Verfahren zählt seine eigene Einheit), und wo mindestens zwei Verfahren im Budget liegen (26 von 45 Zellen), wird die Zahl gegen die anderen Verfahren der Zeile geprüft. In diesen Familien gibt es **kein bestes Verfahren**: die Wahl hängt an der **Struktur** (Baukasten, Symmetrie, Nebenbedingung), an der **Frage** (nur die Zahl, die Liste aller Vertreter, ein Polynom für viele Parameter)
+und an der **Größe**; in den meisten Familien wechselt der Gewinner mit der Größe (nicht bei den Halsketten), ein schneller Gewinner kann **falsch** sein, und manchmal geht nichts mehr.
 
 Weiter unten: **fünf Experimente** (**🔬**), eine **🎲 Spielwiese**, **🚧 Wo die Annahmen enden** und der Expander **📐 Mathematische Formulierung**.
 """
@@ -174,7 +174,7 @@ verdict(verdict_switch(cells))
 st.markdown("---")
 
 st.subheader("🔬 Experiment 3: Schnell, aber falsch")
-st.caption("Kasteleyns Kosinusprodukt zählt Dominosteinparkettierungen in wenigen Schritten, aber in Gleitkomma (double). Gegen die ganzzahlige Profil-Rechnung zeigt sich, wo es falsch wird: sobald der Wert über 2⁵³ liegt.")
+st.caption("Kasteleyns Kosinusprodukt zählt Dominosteinparkettierungen in wenigen Schritten, aber in Gleitkomma (double). Gegen die ganzzahlige Profil-Rechnung zeigt sich, wo es falsch wird: bei Werten über 2⁵³ summieren sich Rundungsfehler im Produkt zu einer falschen ganzen Zahl.")
 kas = _kasteleyn()
 st.plotly_chart(build_kasteleyn(kas), width="stretch", key="kasteleyn_chart")
 st.dataframe([{"Brett": f"{r['n']}×{r['n']}", "exakt (Profil-Rechnung)": full_text(r["exakt"]), "Kasteleyn (Gleitkomma)": full_text(r["Kasteleyn"]), "Abweichung": full_text(r["Abweichung"]), "über 2^53": "ja" if r["über 2^53"] else "nein",
@@ -255,7 +255,7 @@ with st.expander("📐 Mathematische Formulierung"):
 **Aufwandsmaß.** Jedes Verfahren $V$ zählt die Grundschritte $W_V(\text{Aufgabe})$ bis zu einem Budget $B$; $W_V = \infty$ bedeutet „über Budget“. Der **Gewinner** ist $\arg\min_V W_V$ unter den Verfahren, deren Ergebnis dem Ganzzahl-Referenzwert gleicht.
 
 **Verfahren und ihre Aufwände.**
-Tabelle für $a_n = a_{n-1} + a_{n-2}$: $n$ Schritte; Matrixpotenz: $8 \cdot (\lceil \log_2 n \rceil + \text{Zahl der gesetzten Bits})$.
+Tabelle für $a_n = a_{n-1} + a_{n-2}$: $n - 1$ Schritte; Matrixpotenz: $8 \cdot (\text{Bitlänge von } n+1 + \text{Zahl der gesetzten Bits von } n+1)$.
 Surjektionen: $k! \, S(n, k)$ mit Tabelle $n k$ Schritte; Siebformel $\sum_{j=0}^{k} (-1)^j \binom{k}{j} (k-j)^n$ mit $k + 1$ Potenzen; $n! [z^n] (e^z - 1)^k$ mit $k (n+1)(n+2)/2$ Schritten.
 Halsketten: Burnside $\frac{1}{n} \sum_{d \mid n} \varphi(n/d) \, k^d$; FKM gibt jede Halskette aus.
 Dominosteine: Profil-Rechnung (Frontier) mit Zuständen je Zelle; Kasteleyn $\prod_{j=1}^{n/2} \prod_{l=1}^{n/2} \left( 4 \cos^2 \frac{\pi j}{n+1} + 4 \cos^2 \frac{\pi l}{n+1} \right)$ in Gleitkomma.
